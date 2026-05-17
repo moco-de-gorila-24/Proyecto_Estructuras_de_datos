@@ -4,26 +4,29 @@ import Clases.Alumno;
 import Estructuras.Nodos.NodoArbolBinarioBusqueda;
 import Estructuras.Nodos.NodoListaEnlazada;
 
-public class ArbolBinarioBusqueda {
-    private NodoArbolBinarioBusqueda raiz;
+public class ArbolBinarioBusqueda<T> {
+    private NodoArbolBinarioBusqueda<T> raiz;
 
-    public void insertar(Alumno alumno) {
-        raiz = insertarRec(raiz, alumno);
+    public void insertar(T dato) {
+        raiz = insertarRec(raiz, dato);
     }
 
-    private NodoArbolBinarioBusqueda insertarRec(NodoArbolBinarioBusqueda raiz, Alumno alumno) {
+    private NodoArbolBinarioBusqueda insertarRec(NodoArbolBinarioBusqueda<T> raiz, T dato) {
         if (raiz == null) {
-            raiz = new NodoArbolBinarioBusqueda(alumno);
+            raiz = new NodoArbolBinarioBusqueda(dato);
             return raiz;
         }
-        int comparacion = alumno.getMatricula().compareToIgnoreCase(raiz.getAlumno().getMatricula());
+
+        Alumno alumno = (Alumno) dato;
+        int comparacion = alumno.getMatricula().compareToIgnoreCase(alumno.getMatricula());
+
 
         if (comparacion < 0){
-            raiz.setIzquierdo(insertarRec(raiz.getIzquierdo(), alumno));
+            raiz.setIzquierdo(insertarRec(raiz.getIzquierdo(), dato));
 
         }
         else if (comparacion > 0){
-            raiz.setDerecho(insertarRec(raiz.getDerecho(), alumno));
+            raiz.setDerecho(insertarRec(raiz.getDerecho(), dato));
 
         }
         return raiz;
@@ -31,16 +34,18 @@ public class ArbolBinarioBusqueda {
 
     public Alumno buscarAlumno(String matricula) {
         NodoArbolBinarioBusqueda resultado = buscarRec(raiz, matricula);
-        return resultado != null ? resultado.getAlumno() : null;
+        Alumno alumno = (Alumno) resultado.getDato();
+        return resultado != null ? alumno : null;
     }
 
-    private NodoArbolBinarioBusqueda buscarRec(NodoArbolBinarioBusqueda raiz, String matricula) {
-        if (raiz == null || raiz.getAlumno().getMatricula() == matricula){
+    private NodoArbolBinarioBusqueda buscarRec(NodoArbolBinarioBusqueda<T> raiz, String matricula) {
+        if (raiz == null){
             return raiz;
         }
-        int comparacion = matricula.compareToIgnoreCase(raiz.getAlumno().getMatricula());
+        Alumno alumno = (Alumno) raiz.getDato();
+        int comparacion = matricula.compareToIgnoreCase(alumno.getMatricula());
 
-        if (comparacion > 0){
+        if (comparacion < 0){
             return buscarRec(raiz.getIzquierdo(), matricula);
         }
         return buscarRec(raiz.getDerecho(), matricula);
@@ -53,7 +58,8 @@ public class ArbolBinarioBusqueda {
     private void inOrderRec(NodoArbolBinarioBusqueda raiz) {
         if (raiz != null) {
             inOrderRec(raiz.getIzquierdo());
-            System.out.println("Matrícula: " + raiz.getAlumno().getMatricula() + " - Nombre: " + raiz.getAlumno().getNombre());
+            Alumno alumno = (Alumno) raiz.getDato();
+            System.out.println("Matrícula: " + alumno.getMatricula() + " - Nombre: " + alumno.getNombre());
             inOrderRec(raiz.getDerecho());
         }
     }
@@ -65,7 +71,8 @@ public class ArbolBinarioBusqueda {
     private void obtenerTodosRec(NodoArbolBinarioBusqueda raiz, ArregloDinamico<Alumno> lista) {
         if (raiz != null) {
             obtenerTodosRec(raiz.getIzquierdo(), lista);
-            lista.agregar(raiz.getAlumno());
+            Alumno alumno = (Alumno) raiz.getDato();
+            lista.agregar(alumno);
             obtenerTodosRec(raiz.getDerecho(), lista);
         }
     }

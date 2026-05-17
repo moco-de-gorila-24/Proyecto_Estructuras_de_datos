@@ -2,35 +2,43 @@ package Estructuras.Nodos;
 
 import Clases.Alumno;
 
-public class NodoArbolBinarioBusqueda {
-    private Alumno alumno;
+public class NodoArbolBinarioBusqueda<T> {
+    private T dato;
     private NodoArbolBinarioBusqueda izquierdo, derecho;
 
-    public NodoArbolBinarioBusqueda(Alumno alumno) {
-        this.alumno = alumno;
+    public NodoArbolBinarioBusqueda(T dato) {
+        this.dato = dato;
     }
 
-    public Alumno getAlumno() {
-        return alumno;
+    public T getDato() {
+        return dato;
     }
 
-    public void setAlumno(Alumno alumno) {
-        this.alumno = alumno;
+    public void setDato(T dato) {
+        this.dato = dato;
     }
 
-    public NodoArbolBinarioBusqueda getIzquierdo() {
+    public T getAlumno() {
+        return dato;
+    }
+
+    public void setAlumno(T dato) {
+        this.dato = dato;
+    }
+
+    public NodoArbolBinarioBusqueda<T> getIzquierdo() {
         return izquierdo;
     }
 
-    public void setIzquierdo(NodoArbolBinarioBusqueda izquierdo) {
+    public void setIzquierdo(NodoArbolBinarioBusqueda<T> izquierdo) {
         this.izquierdo = izquierdo;
     }
 
-    public NodoArbolBinarioBusqueda getDerecho() {
+    public NodoArbolBinarioBusqueda<T> getDerecho() {
         return derecho;
     }
 
-    public void setDerecho(NodoArbolBinarioBusqueda derecho) {
+    public void setDerecho(NodoArbolBinarioBusqueda<T> derecho) {
         this.derecho = derecho;
     }
 }
