@@ -4,10 +4,7 @@
  */
 package Clases;
 
-/**
- *
- * @author PC
- */
+
 public class SolicitudCalificacion {
     
 }
