@@ -109,28 +109,27 @@ public class ArbolAVL {
 
         //actualiza la altura del nodo
         actualizarAltura(nodo);
-
+        
         //checa el FB y hace rotacion si es necesario
         int balance = factorBalance(nodo);
-
-        if (balance < -1 && promedio < nodo.getHijoIzq().getPromedio()) {
-            return rotarDerecha(nodo);
-        }
-
-        if (balance < -1 && promedio > nodo.getHijoIzq().getPromedio()) {
-            nodo.setHijoIzq(rotarIzquierda(nodo.getHijoIzq()));
-            return rotarDerecha(nodo);
-        }
-
-        if (balance > 1 && promedio >= nodo.getHijoDer().getPromedio()) {
-            return rotarIzquierda(nodo);
-        }
-
+        
+        //desbalance RR
+        if (balance > 1 && promedio >= nodo.getHijoDer().getPromedio()) return rotarIzquierda(nodo);
+        
+        //desbalance RL
         if (balance > 1 && promedio < nodo.getHijoDer().getPromedio()) {
             nodo.setHijoDer(rotarDerecha(nodo.getHijoDer()));
             return rotarIzquierda(nodo);
         }
-
+        
+        //desbalance LL
+        if (balance < -1 && promedio < nodo.getHijoIzq().getPromedio()) return rotarDerecha(nodo);
+        
+        //desbalance LR
+        if (balance < -1 && promedio > nodo.getHijoIzq().getPromedio()) {
+            nodo.setHijoIzq(rotarIzquierda(nodo.getHijoIzq()));
+            return rotarDerecha(nodo);
+        }
         return nodo;
     }
 
