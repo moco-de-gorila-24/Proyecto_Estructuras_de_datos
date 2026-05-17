@@ -3,19 +3,41 @@ package Estructuras;
 import Clases.Alumno;
 import Estructuras.Nodos.NodoListaEnlazada;
 
-public class ListaEnlazada {
-    private NodoListaEnlazada head;
+import java.util.Iterator;
 
-    public void add(Alumno alumno) {
-        NodoListaEnlazada nuevo = new NodoListaEnlazada(alumno);
+
+public class ListaEnlazada<T> implements Iterable<T> {
+    private NodoListaEnlazada<T> head;
+
+    public void add(T dato) {
+        NodoListaEnlazada<T> nuevo = new NodoListaEnlazada<>(dato);
         if (head == null) {
             head = nuevo;
         } else {
-            NodoListaEnlazada actual = head;
+            NodoListaEnlazada<T> actual = head;
             while (actual.getSiguiente() != null) {
                 actual = actual.getSiguiente();
             }
             actual.setSiguiente(nuevo);
+        }
+    }
+
+    public void eliminar(T dato) {
+        if (head == null){
+            return;
+        }
+
+        if (head.getDato().equals(dato)) {
+            head = head.getSiguiente();
+            return;
+        }
+
+        NodoListaEnlazada<T> actual = head;
+        while (actual.getSiguiente() != null) {
+            if (actual.getSiguiente().getDato().equals(dato)) {
+                actual.setSiguiente(actual.getSiguiente().getSiguiente());
+            }
+            actual = actual.getSiguiente();
         }
     }
 
@@ -24,10 +46,32 @@ public class ListaEnlazada {
             System.out.println("No hay estudiantes inscritos.");
             return;
         }
-        NodoListaEnlazada actual = head;
+        NodoListaEnlazada<T> actual = head;
         while (actual != null) {
-            System.out.println("Matrícula: " + actual.getAlumno().getMatricula() + " - Nombre: " + actual.getAlumno().getNombre());
+            Alumno alumno = (Alumno) actual.getDato();
+
+            System.out.println("Matrícula: " + alumno.getMatricula() + " - Nombre: " + alumno.getNombre());
             actual = actual.getSiguiente();
         }
     }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            NodoListaEnlazada<T> actual = head;
+
+            @Override
+            public boolean hasNext() {
+                return actual != null;
+            }
+
+            @Override
+            public T next() {
+                T dato = actual.getDato();
+                actual = actual.getSiguiente();
+                return dato;
+            }
+        };
+    }
+
 }
