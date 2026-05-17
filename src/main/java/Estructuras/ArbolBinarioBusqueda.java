@@ -18,12 +18,12 @@ public class ArbolBinarioBusqueda<T> {
         }
 
         Alumno alumno = (Alumno) dato;
-        int comparacion = alumno.getMatricula().compareToIgnoreCase(alumno.getMatricula());
+        Alumno alumnoRaiz = (Alumno) raiz.getDato();
+        int comparacion = alumno.getMatricula().compareToIgnoreCase(alumnoRaiz.getMatricula());
 
 
         if (comparacion < 0){
             raiz.setIzquierdo(insertarRec(raiz.getIzquierdo(), dato));
-
         }
         else if (comparacion > 0){
             raiz.setDerecho(insertarRec(raiz.getDerecho(), dato));
@@ -33,9 +33,8 @@ public class ArbolBinarioBusqueda<T> {
     }
 
     public Alumno buscarAlumno(String matricula) {
-        NodoArbolBinarioBusqueda resultado = buscarRec(raiz, matricula);
-        Alumno alumno = (Alumno) resultado.getDato();
-        return resultado != null ? alumno : null;
+        NodoArbolBinarioBusqueda<T> resultado = buscarRec(raiz, matricula);
+        return resultado != null ? (Alumno) resultado.getDato() : null;
     }
 
     private NodoArbolBinarioBusqueda buscarRec(NodoArbolBinarioBusqueda<T> raiz, String matricula) {
@@ -45,9 +44,8 @@ public class ArbolBinarioBusqueda<T> {
         Alumno alumno = (Alumno) raiz.getDato();
         int comparacion = matricula.compareToIgnoreCase(alumno.getMatricula());
 
-        if (comparacion < 0){
-            return buscarRec(raiz.getIzquierdo(), matricula);
-        }
+        if (comparacion == 0) return raiz;
+        if (comparacion < 0) return buscarRec(raiz.getIzquierdo(), matricula);
         return buscarRec(raiz.getDerecho(), matricula);
     }
 
@@ -76,4 +74,47 @@ public class ArbolBinarioBusqueda<T> {
             obtenerTodosRec(raiz.getDerecho(), lista);
         }
     }
+    
+    public void eliminar(String matricula) {
+        raiz = eliminarRec(raiz, matricula);
+    }
+
+    private NodoArbolBinarioBusqueda<T> eliminarRec(NodoArbolBinarioBusqueda<T> nodo, String matricula) {
+        if (nodo == null) {
+            System.out.println("Estudiante no encontrado");
+            return null;
+        }
+
+        Alumno alumno = (Alumno) nodo.getDato();
+        int comparacion = matricula.compareToIgnoreCase(alumno.getMatricula());
+
+        if (comparacion < 0) {
+            nodo.setIzquierdo(eliminarRec(nodo.getIzquierdo(), matricula));
+        } else if (comparacion > 0) {
+            nodo.setDerecho(eliminarRec(nodo.getDerecho(), matricula));
+        } else {
+            
+            //caso1: el nodo es hoja
+            if (nodo.getIzquierdo() == null && nodo.getDerecho() == null) return null;
+
+            //caso2: tiene un hijo
+            if (nodo.getIzquierdo() == null) return nodo.getDerecho();
+            if (nodo.getDerecho() == null) return nodo.getIzquierdo();
+            
+            //caso3: tiene 2 hijos
+            NodoArbolBinarioBusqueda<T> sucesor = minimoNodo(nodo.getDerecho());
+            nodo.setDato(sucesor.getDato());
+            nodo.setDerecho(eliminarRec(nodo.getDerecho(),((Alumno) sucesor.getDato()).getMatricula()));
+        }
+        return nodo;
+    }
+
+    private NodoArbolBinarioBusqueda<T> minimoNodo(NodoArbolBinarioBusqueda<T> nodo) {
+        while (nodo.getIzquierdo() != null) {
+            nodo = nodo.getIzquierdo();
+        }
+        return nodo;
+    }
+    
+    
 }

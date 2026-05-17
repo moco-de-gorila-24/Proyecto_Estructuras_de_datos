@@ -6,10 +6,12 @@ public class Curso {
     private String id;
     private String nombre;
     private ListaEnlazada<Alumno> inscritos;
+    private int capacidadMaxima;
 
-    public Curso(String id, String nombre) {
+    public Curso(String id, String nombre, int capacidadMaxima) {
         this.id = id;
         this.nombre = nombre;
+        this.capacidadMaxima = capacidadMaxima;
         this.inscritos = new ListaEnlazada<>();
     }
 
@@ -21,7 +23,16 @@ public class Curso {
         return nombre;
     }
 
-    public ListaEnlazada getInscritos() {
+    public ListaEnlazada<Alumno> getInscritos() {
         return inscritos;
+    }
+
+    public int getCapacidadMaxima() {
+        return capacidadMaxima;
+    }
+    
+    //metodo extra para verificar que el curso no este lleno antes de añadir un nuevo alumno
+    public boolean isFull() {
+        return inscritos.size() >= capacidadMaxima;
     }
 }

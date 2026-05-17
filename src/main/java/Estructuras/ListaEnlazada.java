@@ -8,6 +8,7 @@ import java.util.Iterator;
 
 public class ListaEnlazada<T> implements Iterable<T> {
     private NodoListaEnlazada<T> head;
+    private int size;
 
     public void add(T dato) {
         NodoListaEnlazada<T> nuevo = new NodoListaEnlazada<>(dato);
@@ -20,6 +21,7 @@ public class ListaEnlazada<T> implements Iterable<T> {
             }
             actual.setSiguiente(nuevo);
         }
+        size++;
     }
 
     public void eliminar(T dato) {
@@ -29,6 +31,7 @@ public class ListaEnlazada<T> implements Iterable<T> {
 
         if (head.getDato().equals(dato)) {
             head = head.getSiguiente();
+            size--;
             return;
         }
 
@@ -36,6 +39,8 @@ public class ListaEnlazada<T> implements Iterable<T> {
         while (actual.getSiguiente() != null) {
             if (actual.getSiguiente().getDato().equals(dato)) {
                 actual.setSiguiente(actual.getSiguiente().getSiguiente());
+                size--;
+                return;
             }
             actual = actual.getSiguiente();
         }
@@ -72,6 +77,14 @@ public class ListaEnlazada<T> implements Iterable<T> {
                 return dato;
             }
         };
+    }
+    
+    /**
+     * regresa el tamaño de la lista
+     * @return 
+     */
+    public int size() { // ← método nuevo
+        return size;
     }
 
 }

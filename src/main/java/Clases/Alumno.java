@@ -7,16 +7,28 @@ public class Alumno implements Comparable<Alumno>{
     private String nombre;
     private String telefono;
     private String email;
-    private String domicilio;
+    
+    //atributos de domicilio
+    private String calle;
+    private String numero;
+    private String colonia;
+    private String ciudad;
+    
     ArregloDinamico<Double> calificaciones;
 
-    public Alumno(String matricula, String nombre, String telefono, String email, String domicilio) {
+    public Alumno() {
+    }
+
+    public Alumno(String matricula, String nombre, String telefono, String email, String calle, String numero, String colonia, String ciudad, ArregloDinamico<Double> calificaciones) {
         this.matricula = matricula;
         this.nombre = nombre;
         this.telefono = telefono;
         this.email = email;
-        this.domicilio = domicilio;
-        this.calificaciones = new ArregloDinamico<>();
+        this.calle = calle;
+        this.numero = numero;
+        this.colonia = colonia;
+        this.ciudad = ciudad;
+        this.calificaciones = calificaciones;
     }
 
     public void agregarCalificacion(double calif) {
@@ -52,13 +64,39 @@ public class Alumno implements Comparable<Alumno>{
         this.email = email;
     }
 
-    public String getDomicilio() {
-        return domicilio;
+    public String getCalle() {
+        return calle;
     }
 
-    public void setDomicilio(String domicilio) {
-        this.domicilio = domicilio;
+    public void setCalle(String calle) {
+        this.calle = calle;
     }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getColonia() {
+        return colonia;
+    }
+
+    public void setColonia(String colonia) {
+        this.colonia = colonia;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    
 
     public ArregloDinamico<Double> getCalificaciones() {
         return calificaciones;
