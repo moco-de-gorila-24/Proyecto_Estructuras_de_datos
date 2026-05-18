@@ -1,5 +1,6 @@
 package Estructuras;
 
+import Clases.Alumno;
 import Estructuras.Nodos.NodoListaEnlazada;
 
 import java.util.Objects;
@@ -7,13 +8,54 @@ import java.util.Objects;
 public class ListaEnlazadaCircular<T> {
     private NodoListaEnlazada<T> P;
     private NodoListaEnlazada<T> last;
+    private NodoListaEnlazada<T> actual;
     private int size;
+    
+    public String rotarRol() {
+        if (P == null) return "No hay estudiantes con rol asignado";
+
+        if (actual == null) actual = P;
+        else actual = actual.getSiguiente();
+
+        Alumno alumno = (Alumno) actual.getDato();
+        return "Nuevo tutor/lider: " + alumno.getNombre() + " - Matrícula: " + alumno.getMatricula();
+    }
+    
+    public T getActual() {
+        if (actual == null) return null;
+        return actual.getDato();
+    }
+    
+    public String getContenido() {
+        if (P == null) return "No hay estudiantes con rol asignado";
+        StringBuilder sb = new StringBuilder("Estudiantes con rol\n");
+        NodoListaEnlazada<T> nodo = P;
+        int contador = 1;
+        do {
+            Alumno alumno = (Alumno) nodo.getDato();
+            sb.append(contador++).append(". ")
+            .append(alumno.getNombre())
+            .append(" - Matricula: ").append(alumno.getMatricula());
+            if (nodo == actual) sb.append(" <- rol actual");
+            sb.append("\n");
+            nodo = nodo.getSiguiente();
+        } while (nodo != P);
+        return sb.toString();
+    }
+    
+    public int size() { 
+        return size; 
+    }
+    
+    public boolean estaVacia() { 
+        return P == null;
+    }
 
     public void add(T o) {
         NodoListaEnlazada<T> nuevo = new NodoListaEnlazada<>(o);
         if (last == null) {
             P = nuevo;
-            nuevo.setDato(nuevo.getDato());
+            nuevo.setSiguiente(nuevo);
         } else {
             nuevo.setSiguiente(P);
             last.setSiguiente(nuevo);

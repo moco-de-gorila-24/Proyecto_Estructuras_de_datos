@@ -164,4 +164,41 @@ public class ArbolAVL {
     
     //nota para los metodos de imprimir: quiza haga falta cambiarlos a que 
     //devuelvan string o una lista de string para mostrar en la interfaz :P
+    
+    //de hecho si, aqui pondre metodos para usar en la interfaz
+    
+    /**
+     * regresa una lista con los alumnos ordenados de menor a mayor promedio para usar en la interfaz
+     * @return 
+     */
+    public ArregloDinamico<Alumno> obtenerOrdenadosPorPromedio() {
+        ArregloDinamico<Alumno> lista = new ArregloDinamico<>();
+        if (this.raiz == null) return lista;
+        inOrderRec(this.raiz, lista);
+        return lista;
+    }
+    
+    private void inOrderRec(NodoAVL nodo, ArregloDinamico<Alumno> lista) {
+        if (nodo == null) return;
+        inOrderRec(nodo.getHijoIzq(), lista);
+        lista.agregar(nodo.getAlumno());
+        inOrderRec(nodo.getHijoDer(), lista);
+    }
+    
+    public String getListadoComoString() {
+        ArregloDinamico<Alumno> lista = obtenerOrdenadosPorPromedio();
+        if (lista.size() == 0) return "No se encontraron estudiantes.";
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append("=== Estudiantes ordenados por promedio ===\n");
+        for (int i = 0; i < lista.size(); i++) {
+            Alumno a = lista.get(i);
+            sb.append(i + 1).append(". ")
+            .append(a.getNombre())
+            .append(" | Matrícula: ").append(a.getMatricula())
+            .append(" | Promedio: ").append(String.format("%.2f", a.getPromedioRecursivo()))
+            .append("\n");
+        }
+        return sb.toString();
+    }
 }

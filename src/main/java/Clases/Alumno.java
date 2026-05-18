@@ -19,6 +19,20 @@ public class Alumno implements Comparable<Alumno>{
     public Alumno() {
     }
 
+    //con todo pero sin parametro calificaciones
+    public Alumno(String matricula, String nombre, String telefono, String email, String calle, String numero, String colonia, String ciudad) {
+        this.matricula = matricula;
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.email = email;
+        this.calle = calle;
+        this.numero = numero;
+        this.colonia = colonia;
+        this.ciudad = ciudad;
+        this.calificaciones = new ArregloDinamico<>();
+    }
+    
+    //con todo
     public Alumno(String matricula, String nombre, String telefono, String email, String calle, String numero, String colonia, String ciudad, ArregloDinamico<Double> calificaciones) {
         this.matricula = matricula;
         this.nombre = nombre;
@@ -35,15 +49,17 @@ public class Alumno implements Comparable<Alumno>{
         calificaciones.agregar(calif);
     }
 
-    public double getPromedio() { // [cite: 48]
+    //metodo para calcular el promedio de manera recursiva
+    public double getPromedioRecursivo() {
         if (calificaciones.size() == 0) return 0.0;
-        double suma = 0;
-        for (int i = 0; i < calificaciones.size(); i++) {
-            suma += calificaciones.get(i);
-        }
-        return suma / calificaciones.size();
+        return sumaRecursiva(0) / calificaciones.size();
     }
-
+    //metodo usado en getPromedioRecursivo
+    private double sumaRecursiva(int indice) {
+        if (indice == calificaciones.size()) return 0.0;
+        return calificaciones.get(indice) + sumaRecursiva(indice + 1);
+    }
+    
     public String getMatricula() {
         return matricula;
     }
@@ -109,5 +125,29 @@ public class Alumno implements Comparable<Alumno>{
     @Override
     public int compareTo(Alumno o) {
         return this.matricula.compareToIgnoreCase(o.matricula);
+    }
+    
+    //metodo que construye un string para ver la info del alumno, para cumplir con el punto 2
+    public String getInfo() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("-----Informacion del alumno----\n");
+        sb.append("Matrícula:  ").append(matricula).append("\n");
+        sb.append("Nombre:     ").append(nombre).append("\n");
+        sb.append("Teléfono:   ").append(telefono).append("\n");
+        sb.append("Email:      ").append(email).append("\n");
+        sb.append("Domicilio:  ").append(calle).append(" #").append(numero).append(", ").append(colonia).append(", ").append(ciudad).append("\n");
+        
+        sb.append("Calificaciones: ");
+        if (calificaciones.size() == 0) {
+         sb.append("Sin calificaciones registradas.\n");
+        } else {
+            for (int i = 0; i < calificaciones.size(); i++) {
+                sb.append(calificaciones.get(i));
+                if (i < calificaciones.size() - 1) sb.append(", ");
+            }
+            sb.append("\n");
+            sb.append("Promedio:   ").append(getPromedioRecursivo()).append("\n");
+        }
+        return sb.toString();
     }
 }

@@ -134,5 +134,66 @@ public class ListaDobleEnlazadaCircular<T> {
         }
         return alumnos;
     }
+    
+    public String getNPrimeros(int n) {
+        if (P == null) return "La lista de espera esta vacia";
+
+        int mostrar = Math.min(n, size);//esto es por si se pide mas de los que hay
+        StringBuilder sb = new StringBuilder();
+        sb.append("Primeros ").append(mostrar).append(" en lista de espera\n");
+
+        NodoListaDobleEnlazada<T> actual = P;
+        for (int i = 0; i < mostrar; i++) {
+            Alumno alumno = (Alumno) actual.getDato();
+            sb.append(i + 1).append(". ")
+            .append(alumno.getNombre())
+            .append(" - Matricula: ").append(alumno.getMatricula())
+            .append("\n");
+            actual = actual.getSiguiente();
+        }
+        return sb.toString();
+    }
+    
+    public String recorrerAdelante() {
+        if (P == null) return "La lista de espera esta vacia";
+
+        StringBuilder sb = new StringBuilder("Lista de espera (adelante)\n");
+        NodoListaDobleEnlazada<T> actual = P;
+        int contador = 1;
+        do {
+            Alumno alumno = (Alumno) actual.getDato();
+            sb.append(contador++).append(". ")
+            .append(alumno.getNombre())
+            .append(" - Matricula: ").append(alumno.getMatricula())
+            .append("\n");
+            actual = actual.getSiguiente();
+        } while (actual != P);
+        return sb.toString();
+    }
+    
+    public String recorrerAtras() {
+        if (last == null) return "La lista de espera esta vacia.";
+        
+        StringBuilder sb = new StringBuilder("Lista de espera (atras)\n");
+        NodoListaDobleEnlazada<T> actual = last;
+        int contador = 1;
+        do {
+            Alumno alumno = (Alumno) actual.getDato();
+            sb.append(contador++).append(". ")
+            .append(alumno.getNombre())
+            .append(" - Matricula: ").append(alumno.getMatricula())
+            .append("\n");
+            actual = actual.getAnterior();
+        } while (actual != last);
+        return sb.toString();
+    }
+    
+    public int size() {
+        return size;
+    }
+
+    public boolean estaVacia() {
+        return P == null;
+    }
 
 }

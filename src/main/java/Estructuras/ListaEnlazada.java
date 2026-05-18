@@ -46,18 +46,17 @@ public class ListaEnlazada<T> implements Iterable<T> {
         }
     }
 
-    public void mostrar() {
-        if (head == null) {
-            System.out.println("No hay estudiantes inscritos.");
-            return;
-        }
+    public String getContenido() {
+        if (head == null) return "No hay estudiantes inscritos";
+        StringBuilder sb = new StringBuilder();
         NodoListaEnlazada<T> actual = head;
         while (actual != null) {
             Alumno alumno = (Alumno) actual.getDato();
-
-            System.out.println("Matrícula: " + alumno.getMatricula() + " - Nombre: " + alumno.getNombre());
+            sb.append("Matricula: ").append(alumno.getMatricula())
+            .append(" - Nombre: ").append(alumno.getNombre()).append("\n");
             actual = actual.getSiguiente();
         }
+        return sb.toString();
     }
 
     @Override

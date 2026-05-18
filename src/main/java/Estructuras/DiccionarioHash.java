@@ -1,5 +1,6 @@
 package Estructuras;
 
+import Clases.Curso;
 import Estructuras.Nodos.NodoDiccionario;
 
 import java.util.Iterator;
@@ -70,14 +71,19 @@ public class DiccionarioHash <K, V> implements Iterable<V> {
         return nEntradas == 0;
     }
 
-    public String toString(){
-        String s = "{";
-        for(ListaEnlazada<NodoDiccionario<K, V>> balde: tablaHash)
-            if(balde != null)
-                for(NodoDiccionario<K, V> entrada: balde)
-                    s += entrada + ", ";
-        s+= "}";
-        return s;
+    public String toString() {
+        StringBuilder sb = new StringBuilder("{\n");
+        for (ListaEnlazada<NodoDiccionario<K, V>> balde : tablaHash) {
+            if (balde != null) {
+                for (NodoDiccionario<K, V> entrada : balde) {
+                    sb.append("  ").append(entrada.getLlave())
+                    .append(": ").append(((Curso) entrada.getValor()).getNombre())
+                    .append("\n");
+                }
+            }
+        }
+        sb.append("}");
+        return sb.toString();
     }
 
 
@@ -109,5 +115,23 @@ public class DiccionarioHash <K, V> implements Iterable<V> {
                 return iteradorBalde.next().getValor();
             }
         };
+    }
+    
+    //metodo get para buscar un curso por id 
+    public V get(K llave) {
+        int indice = getIndexHashTable(llave);
+        if (tablaHash[indice] != null) {
+            for (NodoDiccionario<K, V> nodo : tablaHash[indice]) {
+                if (llave.equals(nodo.getLlave())) {
+                    return nodo.getValor();
+                }
+            }
+        }
+        return null;
+    }
+    
+    //metodo para saber si ya existe una llave
+    public boolean contiene(K llave) {
+        return get(llave) != null;
     }
 }

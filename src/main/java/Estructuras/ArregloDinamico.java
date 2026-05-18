@@ -43,4 +43,10 @@ public class ArregloDinamico<T> {
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException();
         elementos[index] = elemento;
     }
+    
+    public void eliminarUltimo() {
+        if (size == 0) return;
+        elementos[size - 1] = null;
+        size--;
+    }
 }
