@@ -18,14 +18,6 @@ public class NodoArbolBinarioBusqueda<T> {
         this.dato = dato;
     }
 
-    public T getAlumno() {
-        return dato;
-    }
-
-    public void setAlumno(T dato) {
-        this.dato = dato;
-    }
-
     public NodoArbolBinarioBusqueda<T> getIzquierdo() {
         return izquierdo;
     }

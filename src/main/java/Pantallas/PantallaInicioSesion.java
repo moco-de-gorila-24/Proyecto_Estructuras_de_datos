@@ -22,8 +22,8 @@ import javax.swing.border.*;
  * @author DANIEL
  */
 public class PantallaInicioSesion extends JFrame{
-    private ArbolBinarioBusqueda<Alumno> arbolEstudiantes = new ArbolBinarioBusqueda<>();
-    private DiccionarioHash<String, Curso> diccionarioCursos = new DiccionarioHash<>(20);
+    private ArbolBinarioBusqueda<Alumno> arbolEstudiantes;
+    private DiccionarioHash<String, Curso> diccionarioCursos;
     private ManejadorAcciones manejadorAcciones;
     private Cola<SolicitudCalificacion> colaSolicitudes;
     
@@ -34,6 +34,8 @@ public class PantallaInicioSesion extends JFrame{
     public PantallaInicioSesion(ArbolBinarioBusqueda<Alumno> arbol, DiccionarioHash<String, Curso> diccionario, Cola<SolicitudCalificacion> cola, ManejadorAcciones manejador) {
         this.arbolEstudiantes = arbol;
         this.diccionarioCursos = diccionario;
+        this.colaSolicitudes = cola;
+        this.manejadorAcciones = manejador;
         
         setTitle("Acceso al Sistema");
         setSize(450, 350); 

@@ -96,7 +96,7 @@ public class Validaciones {
         if (matricula == null) {
             return false;
         }
-        Pattern patt = Pattern.compile("^[a-zA-Z0-9]{4,15}$");
+        Pattern patt = Pattern.compile("^[a-zA-Z0-9]{6}$");
         Matcher match = patt.matcher(matricula);
         return match.find();
     }

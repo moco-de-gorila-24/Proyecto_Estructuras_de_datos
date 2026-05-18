@@ -31,6 +31,7 @@ public class PantallaEstudiantes extends JFrame {
     private ManejadorAcciones manejadorAcciones;
     private Cola<SolicitudCalificacion> colaSolicitudes;
 
+    
     // Colores de la paleta
     private final Color CIAN_PRINCIPAL = new Color(74, 158, 188);
     private final Color CIAN_CLARO = new Color(235, 245, 250);
@@ -404,10 +405,7 @@ private JButton crearBotonTab(String texto, boolean activo) {
             });
 
             btn.addActionListener(e -> {
-                if (texto.equals("Estudiantes")) {
-                    this.dispose();
-                    new PantallaEstudiantes(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
-                } else if (texto.equals("Inscripciones")) {
+                if (texto.equals("Inscripciones")) {
                     this.dispose();
                     new PantallaInscripciones(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
                 } else if(texto.equals("Calificaciones")){
@@ -418,7 +416,7 @@ private JButton crearBotonTab(String texto, boolean activo) {
                     new PantallaCursos(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
                 } else if(texto.equals("Reportes")){
                     this.dispose();
-                    //new PantallaReportes(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
+                    new PantallaReportes(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
                 }
             });
         }

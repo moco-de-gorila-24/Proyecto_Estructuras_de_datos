@@ -51,6 +51,8 @@ public class PantallaInscripciones extends JFrame {
     public PantallaInscripciones(ArbolBinarioBusqueda<Alumno> arbol, DiccionarioHash<String, Curso> diccionario, Cola<SolicitudCalificacion> cola, ManejadorAcciones manejador) {
         this.arbolEstudiantes = arbol;
         this.diccionarioCursos = diccionario;
+        this.colaSolicitudes = cola;
+        this.manejadorAcciones = manejador;
 
         setTitle("Sistema de Gestión Escolar - Inscripciones y Listas de Espera");
         setSize(1200, 780);
@@ -370,7 +372,7 @@ public class PantallaInscripciones extends JFrame {
         return panel;
     }
 
-private JButton crearBotonTab(String texto, boolean activo) {
+    private JButton crearBotonTab(String texto, boolean activo) {
         JButton btn = new JButton(texto);
         btn.setFont(new Font("Segoe UI", activo ? Font.BOLD : Font.PLAIN, 13));
         btn.setPreferredSize(new Dimension(130, 35));
@@ -401,18 +403,15 @@ private JButton crearBotonTab(String texto, boolean activo) {
                 if (texto.equals("Estudiantes")) {
                     this.dispose();
                     new PantallaEstudiantes(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
-                } else if (texto.equals("Inscripciones")) {
+                } else if (texto.equals("Calificaciones")) {
                     this.dispose();
-                    new PantallaInscripciones(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
-                } else if(texto.equals("Calificaciones")){
-                 this.dispose();
-                 new PantallaCalificaciones(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
-                } else if(texto.equals("Cursos")){
+                    new PantallaCalificaciones(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
+                } else if (texto.equals("Cursos")) {
                     this.dispose();
                     new PantallaCursos(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
-                } else if(texto.equals("Reportes")){
+                } else if (texto.equals("Reportes")) {
                     this.dispose();
-                    //new PantallaReportes(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
+                    new PantallaReportes(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
                 }
             });
         }

@@ -323,15 +323,12 @@ public class PantallaCalificaciones extends JFrame {
                 } else if (texto.equals("Inscripciones")) {
                     this.dispose();
                     new PantallaInscripciones(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
-                } else if(texto.equals("Calificaciones")){
-                 this.dispose();
-                 new PantallaCalificaciones(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
                 } else if(texto.equals("Cursos")){
                     this.dispose();
                     new PantallaCursos(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
                 } else if(texto.equals("Reportes")){
                     this.dispose();
-                    //new PantallaReportes(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
+                    new PantallaReportes(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
                 }
             });
         }

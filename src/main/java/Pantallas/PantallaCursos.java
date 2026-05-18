@@ -39,6 +39,9 @@ public class PantallaCursos extends JFrame {
     public PantallaCursos(ArbolBinarioBusqueda<Alumno> arbol, DiccionarioHash<String, Curso> diccionario, Cola<SolicitudCalificacion> cola, ManejadorAcciones manejador) {
         this.arbolEstudiantes = arbol;
         this.diccionarioCursos = diccionario;
+        this.colaSolicitudes = cola;
+        this.manejadorAcciones = manejador;
+        
 
         setTitle("Sistema de Gestión Escolar - Catálogo de Cursos");
         setSize(1100, 750);
@@ -272,12 +275,9 @@ private JButton crearBotonTab(String texto, boolean activo) {
                 } else if(texto.equals("Calificaciones")){
                  this.dispose();
                  new PantallaCalificaciones(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
-                } else if(texto.equals("Cursos")){
-                    this.dispose();
-                    new PantallaCursos(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
                 } else if(texto.equals("Reportes")){
                     this.dispose();
-                    //new PantallaReportes(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
+                    new PantallaReportes(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
                 }
             });
         }
