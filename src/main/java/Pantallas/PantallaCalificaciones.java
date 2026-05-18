@@ -147,9 +147,9 @@ public class PantallaCalificaciones extends JFrame {
         JScrollPane scrollCola = new JScrollPane(txtAreaCola);
         panelCola.add(scrollCola, BorderLayout.CENTER);
 
-        JButton btnProcesar = new JButton("Procesar Siguiente Solicitud (Dequeue)");
+        JButton btnProcesar = new JButton("Procesar Siguiente Solicitud");
         btnProcesar.setFont(new Font("Segoe UI", Font.BOLD, 13));
-        estilizarBotonAccion(btnProcesar, CIAN_OSCURO, Color.WHITE);
+        estilizarBotonAccion(btnProcesar, CIAN_OSCURO, Color.BLACK);
         panelCola.add(btnProcesar, BorderLayout.SOUTH);
 
         gbc.gridx = 1; gbc.gridy = 0;

@@ -134,7 +134,7 @@ public class PantallaReportes extends JFrame {
         btnInicializarLista.addActionListener(e -> inicializarListaRoles());
 
         JButton btnRotarRol = new JButton("Rotar Líder");
-        estilizarBotonAccion(btnRotarRol, CIAN_PRINCIPAL, Color.WHITE);
+        estilizarBotonAccion(btnRotarRol, CIAN_PRINCIPAL, Color.BLACK);
         btnRotarRol.addActionListener(e -> ejecutarRotacion());
 
         panelBotonesRoles.add(btnInicializarLista);
@@ -203,9 +203,7 @@ public class PantallaReportes extends JFrame {
         }
     }
 
-    // ==========================================
     // LÓGICA 6.2: ROTACIÓN CON TU LISTA ENLAZADA CIRCULAR
-    // ==========================================
     private void inicializarListaRoles() {
         if (!listaTutores.estaVacia()) {
             JOptionPane.showMessageDialog(this, "La lista circular de roles ya contiene estudiantes activos.", "Aviso", JOptionPane.WARNING_MESSAGE);
@@ -235,7 +233,6 @@ public class PantallaReportes extends JFrame {
             return;
         }
 
-        // Invocación a tu método nativo 'rotarRol()' que avanza el puntero cíclicamente
         String mensajeResultado = listaTutores.rotarRol();
 
         JOptionPane.showMessageDialog(this, mensajeResultado, "Cambio de Rol Exitoso", JOptionPane.INFORMATION_MESSAGE);
@@ -257,7 +254,7 @@ public class PantallaReportes extends JFrame {
             lblLiderActual.setText("Presione 'Rotar Líder' para inicializar el puntero");
         }
 
-        // Mostramos el mapa completo de la lista circular usando tu método 'getContenido()'
+        // Mostramos el mapa completo de la lista circular 
         txtAreaListaTutores.setText(listaTutores.getContenido());
     }
 

@@ -147,6 +147,22 @@ public class PantallaCursos extends JFrame {
             String clave = txtClave.getText().trim();
             String nombre = txtNombreCurso.getText().trim();
             int capacidad = (Integer) spCapacidad.getValue();
+            
+            Validaciones.Validaciones validador = new Validaciones.Validaciones();
+
+            
+            if (!validador.validarMatricula(clave)) {
+                JOptionPane.showMessageDialog(this, "ID inválida. Solo se permiten letras y números (6 caracteres).", "Error de Validación", JOptionPane.WARNING_MESSAGE);
+                txtClave.requestFocus();
+                return;
+            }
+            
+            if (!validador.validarNombres(nombre)) {
+                JOptionPane.showMessageDialog(this, "Nombre inválido. Use solo letras y espacios.", "Error de Validación", JOptionPane.WARNING_MESSAGE);
+                txtNombreCurso.requestFocus();
+                return;
+            }
+            
 
             if (clave.isEmpty() || nombre.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios para registrar un curso.", "Campos Vacíos", JOptionPane.WARNING_MESSAGE);

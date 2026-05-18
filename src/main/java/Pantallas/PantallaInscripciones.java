@@ -41,7 +41,7 @@ public class PantallaInscripciones extends JFrame {
     // Componentes gráficos
     private JLabel lblInfoCurso, lblInfoEstudiante, lblAlumnoEspera, lblTitularRol;
     private JTextArea txtAreaConsolaEspera; // Para imprimir recorridos completos y los N primeros
-    private JTextField txtCodCurso, txtMatricula;
+    private JTextField txtCodCurso, txtMatricula, txtNombre;
     private JSpinner spTopN;
 
     private final Color CIAN_PRINCIPAL = new Color(74, 158, 188);
@@ -77,7 +77,7 @@ public class PantallaInscripciones extends JFrame {
         contenedorCentral.setBorder(new EmptyBorder(20, 20, 20, 20));
 
         // FORMULARIO DE INSCRIPCIÓN
-        JPanel panelInscribir = crearPanelContenedor("Registro de Inscripción (Validar Cupos)");
+        JPanel panelInscribir = crearPanelContenedor("Registro de Inscripción");
         panelInscribir.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(8, 8, 8, 8);
@@ -134,7 +134,7 @@ public class PantallaInscripciones extends JFrame {
         contenedorCentral.add(panelConsulta);
 
         //  NAVEGACIÓN DE LA LISTA DE ESPERA (REQUERIMIENTO DOBLE CIRCULAR)
-        JPanel panelEspera = crearPanelContenedor("Lista de Espera Interactiva (Doble Circular)");
+        JPanel panelEspera = crearPanelContenedor("Lista de Espera Interactiva");
         panelEspera.setLayout(new BorderLayout(10, 10));
 
         lblAlumnoEspera = new JLabel("Sin estudiantes seleccionados", SwingConstants.CENTER);
@@ -143,18 +143,18 @@ public class PantallaInscripciones extends JFrame {
 
         JPanel panelControlesNavegacion = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 5));
         panelControlesNavegacion.setBackground(Color.WHITE);
-        JButton btnAnterior = new JButton("<< Anterior (getAnterior)");
-        JButton btnSiguiente = new JButton("Siguiente (getSiguiente) >>");
+        JButton btnAnterior = new JButton("Anterior");
+        JButton btnSiguiente = new JButton("Siguiente");
         estilizarBotonAccion(btnAnterior, CIAN_CLARO, Color.BLACK);
         estilizarBotonAccion(btnSiguiente, CIAN_CLARO, Color.BLACK);
-        panelControlesNavegacion.add(btnSiguiente);
         panelControlesNavegacion.add(btnAnterior);
+        panelControlesNavegacion.add(btnSiguiente);
         panelEspera.add(panelControlesNavegacion, BorderLayout.CENTER);
 
         // Subpanel inferior para herramientas nativas (Mostrar N, recorrer en Consola)
         JPanel panelHerramientasNativas = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
         panelHerramientasNativas.setBackground(Color.WHITE);
-        panelHerramientasNativas.add(new JLabel("Ver N Primeros:"));
+        panelHerramientasNativas.add(new JLabel("Ver primeros: "));
         spTopN = new JSpinner(new SpinnerNumberModel(3, 1, 50, 1));
         panelHerramientasNativas.add(spTopN);
 
@@ -166,8 +166,8 @@ public class PantallaInscripciones extends JFrame {
         estilizarBotonAccion(btnRecorrerAtras, CIAN_CLARO, Color.BLACK);
 
         panelHerramientasNativas.add(btnMostrarTop);
-        panelHerramientasNativas.add(btnRecorrerAdelante);
         panelHerramientasNativas.add(btnRecorrerAtras);
+        panelHerramientasNativas.add(btnRecorrerAdelante);
         panelEspera.add(panelHerramientasNativas, BorderLayout.SOUTH);
 
         contenedorCentral.add(panelEspera);
@@ -204,7 +204,8 @@ public class PantallaInscripciones extends JFrame {
         btnInscribir.addActionListener(e -> {
             String idCurso = txtCodCurso.getText().trim();
             String matricula = txtMatricula.getText().trim();
-
+            String nombre = txtNombre.getText().trim();
+                        
             if (idCurso.isEmpty() || matricula.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Debe ingresar el código del curso y la matrícula.", "Campos Requeridos", JOptionPane.WARNING_MESSAGE);
                 return;
@@ -229,7 +230,7 @@ public class PantallaInscripciones extends JFrame {
             } else {
                 // Si excede, agregamos a ListaDobleEnlazadaCircular
                 curso.getListaEspera().add(alumno);
-                JOptionPane.showMessageDialog(this, "Capacidad excedida. Añadido a la lista de espera (Doble Circular).", "Curso Lleno", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Capacidad excedida. Añadido a la lista de espera", "Curso Lleno", JOptionPane.INFORMATION_MESSAGE);
             }
 
             cursoSeleccionadoActual = curso;
@@ -249,7 +250,7 @@ public class PantallaInscripciones extends JFrame {
             }
         });
 
-        // INTERACTIVIDAD ADELANTE (getSiguiente)
+        // INTERACTIVIDAD ADELANTE
         btnSiguiente.addActionListener(e -> {
             if (nodoEsperaActual != null && nodoEsperaActual.getSiguiente() != null) {
                 nodoEsperaActual = nodoEsperaActual.getSiguiente();
@@ -267,7 +268,7 @@ public class PantallaInscripciones extends JFrame {
             }
         });
 
-        // MOSTRAR N PRIMEROS DE LA ESPERA 
+        // MOSTRAR LOS PRIMEROS EN LA ESPERA 
         btnMostrarTop.addActionListener(e -> {
             if (cursoSeleccionadoActual == null) {
                 return;
@@ -295,7 +296,7 @@ public class PantallaInscripciones extends JFrame {
             txtAreaConsolaEspera.setText(salida);
         });
 
-        // ROTACIÓN DE ROLES (REQUERIMIENTO 3)
+        // ROTACIÓN DE ROLES 
         btnRotar.addActionListener(e -> {
             if (cursoSeleccionadoActual == null) {
                 JOptionPane.showMessageDialog(this, "Cargue un curso activo primero.");
