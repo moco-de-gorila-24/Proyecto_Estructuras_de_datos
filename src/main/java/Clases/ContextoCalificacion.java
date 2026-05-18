@@ -18,4 +18,30 @@ public class ContextoCalificacion {
         this.indice = indice;
         this.valorAnterior = valorAnterior;
     }
+
+    public Alumno getAlumno() {
+        return alumno;
+    }
+
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
+    }
+
+    public int getIndice() {
+        return indice;
+    }
+
+    public void setIndice(int indice) {
+        this.indice = indice;
+    }
+
+    public double getValorAnterior() {
+        return valorAnterior;
+    }
+
+    public void setValorAnterior(double valorAnterior) {
+        this.valorAnterior = valorAnterior;
+    }
+    
+    
 }

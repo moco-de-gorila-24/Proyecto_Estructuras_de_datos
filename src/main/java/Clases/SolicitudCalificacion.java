@@ -12,6 +12,8 @@ public class SolicitudCalificacion {
 
     /**
      * Constructor para agregar una calificacion nueva
+     * @param alumno
+     * @param valorNuevo
      */
     public SolicitudCalificacion(Alumno alumno, double valorNuevo) {
         this.alumno = alumno;
@@ -21,6 +23,9 @@ public class SolicitudCalificacion {
 
     /**
      * Constructor para modificar una calificacion existente
+     * @param alumno
+     * @param indice
+     * @param valorNuevo
      */
     public SolicitudCalificacion(Alumno alumno, int indice, double valorNuevo) {
         this.alumno = alumno;

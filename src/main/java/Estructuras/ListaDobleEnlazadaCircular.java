@@ -11,7 +11,6 @@ public class ListaDobleEnlazadaCircular<T> {
     private NodoListaDobleEnlazada<T> last;
     private int size;
 
-
     public void add(T o) {
         NodoListaDobleEnlazada<T> nuevo = new NodoListaDobleEnlazada<>(o);
         if (last == null) {

@@ -1,5 +1,6 @@
 package Clases;
 
+import Estructuras.ListaDobleEnlazadaCircular;
 import Estructuras.ListaEnlazada;
 import Estructuras.ListaEnlazadaCircular;
 
@@ -8,6 +9,7 @@ public class Curso {
     private String nombre;
     private ListaEnlazada<Alumno> inscritos;
     private ListaEnlazadaCircular<Alumno> roles;
+    private ListaDobleEnlazadaCircular<Alumno> listaEspera;
     private int capacidadMaxima;
 
     public Curso(String id, String nombre, int capacidadMaxima) {
@@ -16,6 +18,7 @@ public class Curso {
         this.capacidadMaxima = capacidadMaxima;
         this.inscritos = new ListaEnlazada<>();
         this.roles = new ListaEnlazadaCircular<>();
+        this.listaEspera = new ListaDobleEnlazadaCircular<>(); 
     }
 
     public String getId() {
@@ -38,9 +41,10 @@ public class Curso {
         return roles;
     }
     
+    public ListaDobleEnlazadaCircular<Alumno> getListaEspera() {
+        return listaEspera;
+    }
     
-    
-    //metodo extra para verificar que el curso no este lleno antes de añadir un nuevo alumno
     public boolean isFull() {
         return inscritos.size() >= capacidadMaxima;
     }
