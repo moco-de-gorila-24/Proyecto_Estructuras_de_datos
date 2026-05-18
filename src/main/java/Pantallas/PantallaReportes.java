@@ -73,27 +73,27 @@ public class PantallaReportes extends JFrame {
         // PANEL IZQUIERDO: REPORTES POR PROMEDIO (6.1)
         JPanel panelPromedios = new JPanel(new BorderLayout(10, 10));
         panelPromedios.setBackground(Color.WHITE);
-        panelPromedios.setBorder(new TitledBorder(new LineBorder(CIAN_PRINCIPAL), "6.1 Estudiantes Ordenados por Promedio", TitledBorder.LEFT, TitledBorder.TOP, new Font("Segoe UI", Font.BOLD, 14), CIAN_PRINCIPAL));
+        panelPromedios.setBorder(new TitledBorder(new LineBorder(CIAN_PRINCIPAL), "Estudiantes Ordenados por Promedio", TitledBorder.LEFT, TitledBorder.TOP, new Font("Segoe UI", Font.BOLD, 14), CIAN_PRINCIPAL));
 
         String[] columnas = {"Posición", "Matrícula", "Nombre", "Promedio"};
         modeloEstudiantes = new DefaultTableModel(null, columnas);
         JTable tablaPromedios = new JTable(modeloEstudiantes);
         tablaPromedios.setRowHeight(25);
         tablaPromedios.getTableHeader().setBackground(CIAN_PRINCIPAL);
-        tablaPromedios.getTableHeader().setForeground(Color.WHITE);
+        tablaPromedios.getTableHeader().setForeground(Color.BLACK);
 
         JScrollPane scrollTabla = new JScrollPane(tablaPromedios);
         panelPromedios.add(scrollTabla, BorderLayout.CENTER);
 
         JButton btnGenerarReporte = new JButton("Calcular y Ordenar por Promedio");
-        estilizarBotonAccion(btnGenerarReporte, CIAN_PRINCIPAL, Color.WHITE);
+        estilizarBotonAccion(btnGenerarReporte, CIAN_PRINCIPAL, Color.BLACK);
         btnGenerarReporte.addActionListener(e -> generarReportePromedios());
         panelPromedios.add(btnGenerarReporte, BorderLayout.SOUTH);
 
         //ROTAR ROL USANDO LISTA CIRCULAR (6.2)
         JPanel panelRoles = new JPanel(new GridBagLayout());
         panelRoles.setBackground(Color.WHITE);
-        panelRoles.setBorder(new TitledBorder(new LineBorder(CIAN_PRINCIPAL), "6.2 Rotar Rol de Tutor / Líder de Proyecto", TitledBorder.LEFT, TitledBorder.TOP, new Font("Segoe UI", Font.BOLD, 14), CIAN_PRINCIPAL));
+        panelRoles.setBorder(new TitledBorder(new LineBorder(CIAN_PRINCIPAL), "Rotar Rol de Tutor / Líder de Proyecto", TitledBorder.LEFT, TitledBorder.TOP, new Font("Segoe UI", Font.BOLD, 14), CIAN_PRINCIPAL));
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -102,7 +102,7 @@ public class PantallaReportes extends JFrame {
 
         // Visualización Líder Actual
         gbc.gridy = 0;
-        JLabel lblTituloLider = new JLabel("⭐ LÍDER DE PROYECTO / TUTOR ACTUAL:");
+        JLabel lblTituloLider = new JLabel("LÍDER DE PROYECTO / TUTOR ACTUAL:");
         lblTituloLider.setFont(new Font("Segoe UI", Font.BOLD, 13));
         panelRoles.add(lblTituloLider, gbc);
 

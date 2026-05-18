@@ -76,8 +76,8 @@ public class PantallaInscripciones extends JFrame {
         contenedorCentral.setBackground(Color.WHITE);
         contenedorCentral.setBorder(new EmptyBorder(20, 20, 20, 20));
 
-        // 1. PANEL: FORMULARIO DE INSCRIPCIÓN
-        JPanel panelInscribir = crearPanelContenedor("1. Registro de Inscripción (Validar Cupos)");
+        // FORMULARIO DE INSCRIPCIÓN
+        JPanel panelInscribir = crearPanelContenedor("Registro de Inscripción (Validar Cupos)");
         panelInscribir.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(8, 8, 8, 8);
@@ -109,7 +109,7 @@ public class PantallaInscripciones extends JFrame {
         contenedorCentral.add(panelInscribir);
 
         // PANEL: ESTADO Y MONITOREO DEL CURSO
-        JPanel panelConsulta = crearPanelContenedor("2. Estado de Ocupación del Curso");
+        JPanel panelConsulta = crearPanelContenedor("Estado de Ocupación del Curso");
         panelConsulta.setLayout(new BoxLayout(panelConsulta, BoxLayout.Y_AXIS));
 
         JButton btnVerCurso = new JButton("Cargar Datos de Curso");
@@ -134,7 +134,7 @@ public class PantallaInscripciones extends JFrame {
         contenedorCentral.add(panelConsulta);
 
         //  NAVEGACIÓN DE LA LISTA DE ESPERA (REQUERIMIENTO DOBLE CIRCULAR)
-        JPanel panelEspera = crearPanelContenedor("3. Lista de Espera Interactiva (Doble Circular)");
+        JPanel panelEspera = crearPanelContenedor("Lista de Espera Interactiva (Doble Circular)");
         panelEspera.setLayout(new BorderLayout(10, 10));
 
         lblAlumnoEspera = new JLabel("Sin estudiantes seleccionados", SwingConstants.CENTER);
@@ -147,8 +147,8 @@ public class PantallaInscripciones extends JFrame {
         JButton btnSiguiente = new JButton("Siguiente (getSiguiente) >>");
         estilizarBotonAccion(btnAnterior, CIAN_CLARO, Color.BLACK);
         estilizarBotonAccion(btnSiguiente, CIAN_CLARO, Color.BLACK);
-        panelControlesNavegacion.add(btnAnterior);
         panelControlesNavegacion.add(btnSiguiente);
+        panelControlesNavegacion.add(btnAnterior);
         panelEspera.add(panelControlesNavegacion, BorderLayout.CENTER);
 
         // Subpanel inferior para herramientas nativas (Mostrar N, recorrer en Consola)
@@ -158,7 +158,7 @@ public class PantallaInscripciones extends JFrame {
         spTopN = new JSpinner(new SpinnerNumberModel(3, 1, 50, 1));
         panelHerramientasNativas.add(spTopN);
 
-        JButton btnMostrarTop = new JButton("Imprimir N");
+        JButton btnMostrarTop = new JButton("Imprimir");
         JButton btnRecorrerAdelante = new JButton("Recorrer Delante");
         JButton btnRecorrerAtras = new JButton("Recorrer Atras");
         estilizarBotonAccion(btnMostrarTop, CIAN_PRINCIPAL, Color.BLACK);

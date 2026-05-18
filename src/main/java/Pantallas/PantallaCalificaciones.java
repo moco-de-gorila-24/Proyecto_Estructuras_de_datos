@@ -137,7 +137,7 @@ public class PantallaCalificaciones extends JFrame {
         // 2. PANEL COLA VISUAL
         JPanel panelCola = new JPanel(new BorderLayout(10, 10));
         panelCola.setBackground(Color.WHITE);
-        panelCola.setBorder(new TitledBorder(new LineBorder(CIAN_PRINCIPAL), "Cola de Espera (FIFO) - Solicitudes Pendientes", 
+        panelCola.setBorder(new TitledBorder(new LineBorder(CIAN_PRINCIPAL), "Solicitudes Pendientes", 
                 TitledBorder.LEFT, TitledBorder.TOP, new Font("Segoe UI", Font.BOLD, 14), CIAN_PRINCIPAL));
 
         txtAreaCola = new JTextArea();
@@ -273,7 +273,7 @@ public class PantallaCalificaciones extends JFrame {
         }
 
         txtAreaCola.setText("");
-        txtAreaCola.append(String.format("   %-12s | %-20s | %-8s | %-10s\n", "MATRÍCULA", "ALUMNO", "TIPO", "VALOR"));
+        txtAreaCola.append(String.format("   %-12s | %-20s | %-8s | %-10s\n", "MATRÍCULA", "ALUMNO", "ESTADO", "CALIICACION"));
         txtAreaCola.append("   -----------------------------------------------------------------\n");
         
         Cola<SolicitudCalificacion> tempCola = new Cola<>();
