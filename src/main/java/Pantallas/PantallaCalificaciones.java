@@ -44,17 +44,17 @@ public class PantallaCalificaciones extends JFrame {
     private JTextField txtMatricula;
     private JTextField txtCalificacion;
     // Agregamos un campo opcional por si quieren mandar un índice a modificar (vacío = nueva)
-    private JTextField txtIndiceModificar; 
+    private JTextField txtIndiceModificar;
 
     private final Color CIAN_PRINCIPAL = new Color(74, 158, 188);
     private final Color CIAN_CLARO = new Color(235, 245, 250);
     private final Color CIAN_OSCURO = new Color(42, 107, 132);
 
-    public PantallaCalificaciones(ArbolBinarioBusqueda<Alumno> arbol, 
-                                  DiccionarioHash<String, Curso> diccionario, 
-                                  Cola<SolicitudCalificacion> cola, 
-                                  ManejadorAcciones manejador) {
-        
+    public PantallaCalificaciones(ArbolBinarioBusqueda<Alumno> arbol,
+            DiccionarioHash<String, Curso> diccionario,
+            Cola<SolicitudCalificacion> cola,
+            ManejadorAcciones manejador) {
+
         this.arbolEstudiantes = arbol;
         this.diccionarioCursos = diccionario;
         this.colaSolicitudes = cola;
@@ -88,14 +88,15 @@ public class PantallaCalificaciones extends JFrame {
         // 1. PANEL FORMULARIO
         JPanel panelFormulario = new JPanel(new GridBagLayout());
         panelFormulario.setBackground(Color.WHITE);
-        panelFormulario.setBorder(new TitledBorder(new LineBorder(CIAN_PRINCIPAL), "Nueva Solicitud de Calificación", 
+        panelFormulario.setBorder(new TitledBorder(new LineBorder(CIAN_PRINCIPAL), "Nueva Solicitud de Calificación",
                 TitledBorder.LEFT, TitledBorder.TOP, new Font("Segoe UI", Font.BOLD, 14), CIAN_PRINCIPAL));
-        
+
         GridBagConstraints gbf = new GridBagConstraints();
         gbf.insets = new Insets(10, 10, 10, 10);
         gbf.anchor = GridBagConstraints.WEST;
 
-        gbf.gridx = 0; gbf.gridy = 0;
+        gbf.gridx = 0;
+        gbf.gridy = 0;
         JLabel lblMatricula = new JLabel("Matrícula Alumno:");
         lblMatricula.setFont(new Font("Segoe UI", Font.BOLD, 12));
         panelFormulario.add(lblMatricula, gbf);
@@ -104,7 +105,8 @@ public class PantallaCalificaciones extends JFrame {
         txtMatricula = new JTextField(15);
         panelFormulario.add(txtMatricula, gbf);
 
-        gbf.gridx = 0; gbf.gridy = 1;
+        gbf.gridx = 0;
+        gbf.gridy = 1;
         JLabel lblCalificacion = new JLabel("Calificación (Nota):");
         lblCalificacion.setFont(new Font("Segoe UI", Font.BOLD, 12));
         panelFormulario.add(lblCalificacion, gbf);
@@ -113,7 +115,8 @@ public class PantallaCalificaciones extends JFrame {
         txtCalificacion = new JTextField(15);
         panelFormulario.add(txtCalificacion, gbf);
 
-        gbf.gridx = 0; gbf.gridy = 2;
+        gbf.gridx = 0;
+        gbf.gridy = 2;
         JLabel lblIndice = new JLabel("Índice a Modificar (Opcional):");
         lblIndice.setFont(new Font("Segoe UI", Font.PLAIN, 11));
         panelFormulario.add(lblIndice, gbf);
@@ -123,21 +126,24 @@ public class PantallaCalificaciones extends JFrame {
         txtIndiceModificar.setToolTipText("Dejar vacío si es una nueva calificación");
         panelFormulario.add(txtIndiceModificar, gbf);
 
-        gbf.gridx = 0; gbf.gridy = 3;
+        gbf.gridx = 0;
+        gbf.gridy = 3;
         gbf.gridwidth = 2;
         gbf.anchor = GridBagConstraints.CENTER;
         JButton btnEncolar = new JButton("Enviar a Cola de Espera");
         estilizarBotonAccion(btnEncolar, CIAN_PRINCIPAL, Color.BLACK);
         panelFormulario.add(btnEncolar, gbf);
 
-        gbc.gridx = 0; gbc.gridy = 0;
-        gbc.weightx = 0.4; gbc.weighty = 1.0;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 0.4;
+        gbc.weighty = 1.0;
         contenedorCentral.add(panelFormulario, gbc);
 
         // 2. PANEL COLA VISUAL
         JPanel panelCola = new JPanel(new BorderLayout(10, 10));
         panelCola.setBackground(Color.WHITE);
-        panelCola.setBorder(new TitledBorder(new LineBorder(CIAN_PRINCIPAL), "Solicitudes Pendientes", 
+        panelCola.setBorder(new TitledBorder(new LineBorder(CIAN_PRINCIPAL), "Solicitudes Pendientes",
                 TitledBorder.LEFT, TitledBorder.TOP, new Font("Segoe UI", Font.BOLD, 14), CIAN_PRINCIPAL));
 
         txtAreaCola = new JTextArea();
@@ -152,8 +158,10 @@ public class PantallaCalificaciones extends JFrame {
         estilizarBotonAccion(btnProcesar, CIAN_OSCURO, Color.BLACK);
         panelCola.add(btnProcesar, BorderLayout.SOUTH);
 
-        gbc.gridx = 1; gbc.gridy = 0;
-        gbc.weightx = 0.6; gbc.weighty = 1.0;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.weightx = 0.6;
+        gbc.weighty = 1.0;
         contenedorCentral.add(panelCola, gbc);
 
         add(contenedorCentral, BorderLayout.CENTER);
@@ -168,17 +176,16 @@ public class PantallaCalificaciones extends JFrame {
         add(panelBotonesInferior, BorderLayout.SOUTH);
 
         // --- LOGICA DE EVENTOS ---
-
         actualizarAreaColaVisual();
 
-        // EVENTO: Encolar usando tus Constructores sobrecargados
+        // Encolar
         btnEncolar.addActionListener(e -> {
             Validaciones validador = new Validaciones();
             String mat = txtMatricula.getText().trim();
             String calStr = txtCalificacion.getText().trim();
             String indStr = txtIndiceModificar.getText().trim();
 
-            if (mat.isEmpty() || !validador.validarPrecio(calStr)) { 
+            if (mat.isEmpty() || !validador.validarPrecio(calStr)) {
                 JOptionPane.showMessageDialog(this, "Ingrese datos numéricos válidos.", "Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
@@ -194,8 +201,32 @@ public class PantallaCalificaciones extends JFrame {
 
             // Determinar qué constructor usar basado en si se pasó un índice
             if (indStr.isEmpty()) {
-                // Constructor 1: Calificación Nueva (indice asigna internamente -1)
+                //  Calificación Nueva (indice asigna internamente -1)
                 nuevaSolicitud = new SolicitudCalificacion(estudiante, nota);
+                int calificacionesActuales = estudiante.getCalificaciones().size();
+                int solicitudesEnCola = 0;
+
+                Cola<SolicitudCalificacion> tempCola = new Cola<>();
+                while (!colaSolicitudes.isEmpty()) {
+                    SolicitudCalificacion s = colaSolicitudes.dequeue();
+                    if (s.getAlumno().getMatricula().equals(mat) && s.esNueva()) {
+                        solicitudesEnCola++;
+                    }
+                    tempCola.enqueue(s);
+                }
+                // Devolvemos los elementos a la cola original
+                while (!tempCola.isEmpty()) {
+                    colaSolicitudes.enqueue(tempCola.dequeue());
+                }
+
+                // Si la suma total de las notas que ya tiene más las que están en cola alcanza o supera las 3
+                if ((calificacionesActuales + solicitudesEnCola) >= 3) {
+                    JOptionPane.showMessageDialog(this,
+                            "El alumno ya cuenta con el límite máximo de 3 calificaciones (entre registradas y pendientes en cola).",
+                            "Límite Alcanzado", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
             } else {
                 if (!validador.validarCantiadad(indStr)) {
                     JOptionPane.showMessageDialog(this, "El índice debe ser un número entero válido.", "Error", JOptionPane.WARNING_MESSAGE);
@@ -206,13 +237,13 @@ public class PantallaCalificaciones extends JFrame {
                     JOptionPane.showMessageDialog(this, "Índice fuera de rango para las calificaciones actuales.", "Error", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
-                // Constructor 2: Modificación de calificación existente
+                // Modificación de calificación existente
                 nuevaSolicitud = new SolicitudCalificacion(estudiante, idx, nota);
             }
 
             colaSolicitudes.enqueue(nuevaSolicitud);
             JOptionPane.showMessageDialog(this, "Solicitud añadida a la cola.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            
+
             txtMatricula.setText("");
             txtCalificacion.setText("");
             txtIndiceModificar.setText("");
@@ -275,12 +306,12 @@ public class PantallaCalificaciones extends JFrame {
         txtAreaCola.setText("");
         txtAreaCola.append(String.format("   %-12s | %-20s | %-8s | %-10s\n", "MATRÍCULA", "ALUMNO", "ESTADO", "CALIICACION"));
         txtAreaCola.append("   -----------------------------------------------------------------\n");
-        
+
         Cola<SolicitudCalificacion> tempCola = new Cola<>();
         while (!colaSolicitudes.isEmpty()) {
             SolicitudCalificacion s = colaSolicitudes.dequeue();
             String tipo = s.esNueva() ? "NUEVA" : "MODIF (Idx:" + s.getIndice() + ")";
-            txtAreaCola.append(String.format("   %-12s | %-20s | %-8s | %-10.2f\n", 
+            txtAreaCola.append(String.format("   %-12s | %-20s | %-8s | %-10.2f\n",
                     s.getAlumno().getMatricula(), s.getAlumno().getNombre(), tipo, s.getValorNuevo()));
             tempCola.enqueue(s);
         }
@@ -323,10 +354,10 @@ public class PantallaCalificaciones extends JFrame {
                 } else if (texto.equals("Inscripciones")) {
                     this.dispose();
                     new PantallaInscripciones(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
-                } else if(texto.equals("Cursos")){
+                } else if (texto.equals("Cursos")) {
                     this.dispose();
                     new PantallaCursos(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
-                } else if(texto.equals("Reportes")){
+                } else if (texto.equals("Reportes")) {
                     this.dispose();
                     new PantallaReportes(arbolEstudiantes, diccionarioCursos, colaSolicitudes, manejadorAcciones).setVisible(true);
                 }
@@ -343,8 +374,17 @@ public class PantallaCalificaciones extends JFrame {
         btn.setForeground(textoOriginal);
         btn.setBorder(new LineBorder(CIAN_PRINCIPAL, 1, true));
         btn.addMouseListener(new MouseAdapter() {
-            @Override public void mousePressed(MouseEvent e) { btn.setBackground(CIAN_OSCURO); btn.setForeground(Color.WHITE); }
-            @Override public void mouseReleased(MouseEvent e) { btn.setBackground(fondoOriginal); btn.setForeground(textoOriginal); }
+            @Override
+            public void mousePressed(MouseEvent e) {
+                btn.setBackground(CIAN_OSCURO);
+                btn.setForeground(Color.WHITE);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                btn.setBackground(fondoOriginal);
+                btn.setForeground(textoOriginal);
+            }
         });
     }
 }
